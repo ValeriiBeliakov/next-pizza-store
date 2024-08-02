@@ -69,9 +69,22 @@ export const Filters: React.FC<Props>=({className})=>{
           {text:"Моцарелла5",
             value:'6'},
             {text:"Моцарелла5",
-              value:'6'},
+              value:'7'},
               {text:"Моцарелла5",
-                value:'6'}]
+                value:'8'},
+                {text:"Моцарелла",
+                  value:'9'
+                },
+                {text:"Моцарелла",
+                  value:'10'
+                },
+                {text:"Моцарелла",
+                  value:'11'
+                },
+                {text:"Моцарелла",
+                  value:'12'
+                },
+              ]
       }
       />
 
