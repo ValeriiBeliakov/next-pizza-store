@@ -4,7 +4,7 @@ const mapSize={
     40:'Большая'
 } as const;
 
-const mapPizzaType = {
+export const mapPizzaType = {
     1 : 'традиционная',
     2 : 'тонкое'
 } as const;

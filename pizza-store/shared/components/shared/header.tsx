@@ -5,7 +5,7 @@ import pizza from "../../../app/images/icons/pizza.svg"
 import { Button } from '../ui';
 import { ArrowRight, ShoppingCart, User } from 'lucide-react';
 import Link from 'next/link';
-import { SearchInput } from "./index"
+import { CartButton, SearchInput } from "./index"
 import { cn } from '@/shared/lib/utils';
 
 
@@ -37,15 +37,7 @@ export const Header: React.FC<Props>=({className})=>{
             Войти
         </Button>
         <div>
-            <Button className='group relative'>
-                <b>0</b>
-                <span className='h-full w-[1px] bg-white/30 mx-3'></span>
-                <div className='flex items-center gap-1 transition duration-300  group-hover:opacity-0'>
-                    <ShoppingCart className='relative' size={16} strokeWidth={2}/>
-                    <b>0</b>
-                </div>
-                <ArrowRight className='absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'/>
-            </Button>
+           <CartButton/>
         </div>
     </div>
       </Container>

@@ -10,6 +10,7 @@ import {
 import { IngredientItem, PizzaImage, Title, GroupVariants } from "./index";
 import { calcTotalPizzaPrice } from "@/shared/lib/calc-total-pizza-price";
 import { usePizzaSize } from "@/shared/hooks/use-pizza-size";
+import { useDetails } from "@/shared/hooks/use-details";
 
 interface Props {
   imageUrl: string;
@@ -33,20 +34,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
  
  
   const {type,size,setSize,setType,availableSizes,selectedIngredients,onClickActive} = usePizzaSize(items);
- 
-  const textDetaills = `${size}см, ${
-    type === 1 ? "традиционное" : "тонкое"
-  } тесто, ${selectedIngredients.length} ${
-    selectedIngredients.length === 1 ? "ингредиент" : "ингредиента"
-  }`;
-  
-  const totalPrice = calcTotalPizzaPrice(
-    items,
-    ingredients,
-    size,
-    type,
-    selectedIngredients
-  );
+  const {totalPrice,textDetaills} = useDetails(size,type,selectedIngredients,items,ingredients);
   const handleClickAdd = () => {
     // onClickAddCart();
     console.log({ size, type, selectedIngredients });
