@@ -8,7 +8,6 @@ import {
   pizzaTypes,
 } from "@/shared/constants/pizza";
 import { IngredientItem, PizzaImage, Title, GroupVariants } from "./index";
-import { calcTotalPizzaPrice } from "@/shared/lib/calc-total-pizza-price";
 import { usePizzaSize } from "@/shared/hooks/use-pizza-size";
 import { useDetails } from "@/shared/hooks/use-details";
 
@@ -18,7 +17,7 @@ interface Props {
   ingredients: Ingredient[];
   items: ProductItem[];
   loading?: boolean;
-  onClickAddCart?: () => void; //itemId: number, ingredients: number[]
+  onSubmit: (itemId: number, ingredients: number[]) => void;
   className?: string;
 }
 
@@ -28,15 +27,17 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   imageUrl,
   ingredients,
   loading,
-  onClickAddCart,
+  onSubmit,
   className,
 }) => {
  
  
-  const {type,size,setSize,setType,availableSizes,selectedIngredients,onClickActive} = usePizzaSize(items);
+  const {type,size,setSize,setType,availableSizes,selectedIngredients,onClickActive,currentItemId} = usePizzaSize(items);
   const {totalPrice,textDetaills} = useDetails(size,type,selectedIngredients,items,ingredients);
   const handleClickAdd = () => {
-    // onClickAddCart();
+    if(currentItemId){
+    onSubmit(currentItemId, selectedIngredients);
+    }
     console.log({ size, type, selectedIngredients });
   };
  
@@ -76,6 +77,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         <Button
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           onClick={handleClickAdd}
+          loading={loading}
+
         >
           Добавить в корзину за {totalPrice} ₽
         </Button>

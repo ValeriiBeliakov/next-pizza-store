@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { Ingredient, ProductItem } from '@prisma/client';
 import { Title } from './title';
 import { Button } from '../ui';
 import { cn } from '@/shared/lib/utils';
@@ -9,16 +7,18 @@ interface Props {
     imageUrl: string;
     name: string;
     loading?: boolean;
-    // onSubmit: (itemId: number, ingredients: number[]) => void;
+    onClickAddCart?: () => void; //itemId: number, ingredients: number[]
     className?: string;
+    price: number;
   }
 
 export const ChooseProductForm: React.FC<Props>=({  name,
     imageUrl,
     loading,
-    className,})=>{
-        const textDetaills = 2;
-        const totalPrice = 350;
+    className,
+    onClickAddCart,
+    price
+  })=>{
  return (
     <div className={cn(className, 'flex flex-1')}>
          <div className="flex items-center justify-center flex-1 relative w-full">
@@ -30,11 +30,12 @@ export const ChooseProductForm: React.FC<Props>=({  name,
       </div>
         <div className="w-[490px] bg-[#f7f6f5] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
-        <p className="text-gray-400">{textDetaills}</p>
+        {/* <p className="text-gray-400">{textDetaills}</p> */}
 
         <Button
-          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          Добавить в корзину за {totalPrice} ₽
+          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+          onClick={onClickAddCart} loading={loading} >
+          Добавить в корзину за {price} ₽
         </Button>
         </div>
     </div>

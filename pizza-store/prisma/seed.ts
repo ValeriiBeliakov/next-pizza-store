@@ -1,6 +1,5 @@
-
+import { hashSync } from 'bcrypt';
 import { prisma } from "./prisma-client";
-import {hashSync} from "bcrypt"
 import { categories, ingredients, products } from './constants';
 import { Prisma } from "@prisma/client";
 

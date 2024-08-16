@@ -18,6 +18,6 @@ export const useQueryFilters = (filters:QueryFilters)=>{
         router.push(`?${query}`,{
          scroll:false
         })
-       },[filters,router])
+       },[filters])
     
 }

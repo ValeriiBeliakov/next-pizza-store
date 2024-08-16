@@ -1,5 +1,4 @@
 
-
 export { PizzaImage } from './pizza-image';
 export { SearchInput } from './search-input';
 export { RangeSlider } from './range-slider';
@@ -18,3 +17,4 @@ export {IngredientItem}  from './ingredient';
 export {GroupVariants} from './group-variants';
 export {CartButton} from './cart-button';
 export {CartDrawer} from './cart-drawer';
+export {ProductForm} from "./product-form"

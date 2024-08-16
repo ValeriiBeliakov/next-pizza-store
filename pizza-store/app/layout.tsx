@@ -1,4 +1,4 @@
-
+import  { Toaster } from 'react-hot-toast';
 import { Nunito } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +17,7 @@ export default function MainLayout({
     <html lang="en">  
       <body className={nunito.className}> 
        {children}
+       <Toaster/>
       </body>
     </html>
   );

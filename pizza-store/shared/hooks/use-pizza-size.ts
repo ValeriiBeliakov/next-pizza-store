@@ -12,6 +12,7 @@ interface ReturnProps {
   setType:(type:PizzaType)=>void;
   selectedIngredients: Array<number>;
   onClickActive: (id: number) => void;
+  currentItemId?:number
   availableSizes: Variant[]
 }
 export const usePizzaSize = (items:ProductItem[]):ReturnProps => {
@@ -20,7 +21,9 @@ export const usePizzaSize = (items:ProductItem[]):ReturnProps => {
   const [selectedIngredients, setSelectesIngredients] = useState<Array<number>>(
     []
   );
+
   const availableSizes = getAvailablePizzaSizes(items, type);
+  const currentItemId = items.find((item) => item.size === size && item.pizzaType === type)?.id;
   const onClickActive = (id: number) =>
     setSelectesIngredients(
       selectedIngredients.includes(id)
@@ -47,6 +50,7 @@ export const usePizzaSize = (items:ProductItem[]):ReturnProps => {
         setType,
         selectedIngredients,
         onClickActive,
-        availableSizes
+        availableSizes,
+        currentItemId
       }
 }
