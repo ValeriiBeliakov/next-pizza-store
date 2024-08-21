@@ -4,7 +4,7 @@ import crypto from "crypto";
 import { findOrCreateCart } from "@/shared/lib/find-or-create-cart";
 import { CreateCartItemValues } from "@/shared/services/dto/cart.dto";
 import { updateCartTotalAmount } from "@/shared/lib/update-cart-total-amount";
-import { ingredients } from "@/prisma/constants";
+
 
 export async function GET(req: NextRequest) {
   try {
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest){
             where:{
                 cartId:userCart.id,
                 productItemId:data.productItemId,
-                ingredients:{every:{id:{in:data.ingredients}}}
+                ingredients: {every:{id:{in:data.ingredients}}}
 
             }
         })
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest){
                 }
             })
             
-        }
+        } else{
             await prisma.cartItem.create({
                 data:{
                     cartId: userCart.id,
@@ -77,6 +77,7 @@ export async function POST(req: NextRequest){
             const res =  NextResponse.json(updatedUserCart);
             res.cookies.set('cartToken',token);
             return res;
+          }
         
     } catch (error) {
         console.log('[Cart_Post] Server Error',error);

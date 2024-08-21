@@ -7,5 +7,6 @@ import { Popover } from "./popover";
 import { Select } from "./select";
 import { Skeleton } from "./skeleton";
 import { Slider } from "./slider";
+import { Textarea } from "./textarea";
 
-export {Button,Checkbox,Dialog,Drawer,Input,Popover,Select,Skeleton,Slider};
+export {Button,Checkbox,Dialog,Drawer,Input,Popover,Select,Skeleton,Slider,Textarea};
