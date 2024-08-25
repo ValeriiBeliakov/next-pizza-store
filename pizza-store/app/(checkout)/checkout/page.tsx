@@ -6,7 +6,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckoutAddress, CheckoutCart, CheckoutPersonalData, CheckoutSidebar } from "@/shared/components/shared/checkout";
 import { CheckoutFormData, checkoutFormSchema } from "@/shared/components/shared/checkout/checkout-form-schema";
-import { createOrder } from "@/app/actions";
+// import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -40,7 +40,7 @@ export default function CheckoutPage() {
     if(session){
    fetchUserInfo()
     }
-  })
+  },[])
   const onSubmit:SubmitHandler<CheckoutFormData> = async (data: CheckoutFormData) => {
     try {
       setSubmitting(true);
