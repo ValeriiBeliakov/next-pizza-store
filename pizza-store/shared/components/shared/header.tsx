@@ -1,12 +1,16 @@
-import React from "react";
+'use client';
+
+import React, { useEffect, useState } from "react";
 import { Container } from "./container";
 import Image from "next/image";
 import pizza from "../../../app/images/icons/pizza.svg";
-import { Button } from "../ui";
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
-import { CartButton, SearchInput } from "./index";
+import { AuthModal, CartButton, ProfileButton, SearchInput } from "./index";
 import { cn } from "@/shared/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+
+
 
 interface Props {
   className?: string;
@@ -19,6 +23,18 @@ export const Header: React.FC<Props> = ({
   hasSearch = true,
   hasCart = true,
 }) => {
+  const router = useRouter();
+  const [open,setOpen] = useState(false);
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    if(searchParams.has('verify')){
+      router.replace('/')
+      setTimeout(() => toast.success('Почта успешно подтверждена'), 500)
+    }
+    
+  },[])
+
+ 
   return (
     <header className={cn("border border-b", className)}>
       <Container className="flex items-center justify-between py-8">
@@ -41,10 +57,8 @@ export const Header: React.FC<Props> = ({
         )}
         {/* right side */}
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="flex gap-2 items-center">
-            <User size={16} />
-            Войти
-          </Button>
+          <AuthModal open={open} onClose={()=>setOpen(false)}/>
+          <ProfileButton onClickSignIn={()=>setOpen(true)}/>
           {hasCart && (
             <div>
               <CartButton />

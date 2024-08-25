@@ -1,5 +1,6 @@
 import { Header } from "@/shared/components/shared";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 
 
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return ( 
         <main className="min-h-screen">
+          <Suspense>
           <Header/>
+          </Suspense>
           {children}
           {modal}
         </main>

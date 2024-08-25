@@ -1,3 +1,4 @@
+export { ProfileButton } from './profile-button';
 export { ErrorText } from './error-text';
 export { RequiredSymbol } from './required-symbol';
 export { PizzaImage } from './pizza-image';
@@ -23,4 +24,8 @@ export {WhiteBlock} from "./white-block"
 export {CheckoutItemDetails} from './checkout-item-details'
 export {CheckoutItemSkeleton} from "./checkout-item-skeleton"
 export {ClearButton} from "./clear-button"
+export { InfoBlock} from "./info-block"
+export {ProfileForm} from "./profile-form"
+
+export * from "./email-templates/index"
 

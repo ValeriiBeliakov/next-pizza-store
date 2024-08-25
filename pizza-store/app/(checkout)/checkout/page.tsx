@@ -8,13 +8,16 @@ import { CheckoutAddress, CheckoutCart, CheckoutPersonalData, CheckoutSidebar } 
 import { CheckoutFormData, checkoutFormSchema } from "@/shared/components/shared/checkout/checkout-form-schema";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { Api } from "@/shared/services/api-client";
 
 
 
 export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const { items, totalAmount, onClickCountButton, onDelete, loading } = useCarts();
+  const {data:session} = useSession();
   const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
@@ -26,29 +29,40 @@ export default function CheckoutPage() {
       comment: ''
     }
   })
-  const Tax = 20;
-  const DeliveryPrice = 150;
-  const total = totalAmount + Tax + DeliveryPrice;
-  const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
+  useEffect(() => {
+    async function fetchUserInfo(){
+      const data = await Api.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(' ');
+      form.setValue('firstName',firstName);
+      form.setValue('lastName',lastName);
+      form.setValue('email',data.email);
+    }
+    if(session){
+   fetchUserInfo()
+    }
+  })
+  const onSubmit:SubmitHandler<CheckoutFormData> = async (data: CheckoutFormData) => {
     try {
       setSubmitting(true);
-      const url = createOrder(data);
-      toast.success('Заказ оформлен, переход на оплату', { icon: '✅' })
-      if (url) {
-        location.href = url;
-      }
 
-    } catch (error) {
-      setSubmitting(false)
-      console.log(error)
-      toast.error('Не удалось оформить заказ', {
-        icon: '❌'
-      })
-    } finally {
-      setSubmitting(false)
+      // const url = await createOrder(data);
+
+      toast.error('Заказ успешно оформлен! 📝 Переход на оплату... ', {
+        icon: '✅',
+      });
+// if(url){
+//   location.href = url;
+// }
+     
+    } catch (err) {
+      console.log(err);
+      setSubmitting(false);
+      toast.error('Не удалось создать заказ', {
+        icon: '❌',
+      });
     }
-    createOrder(data);
-  }
+  };
+
   return <Container className="mt-10">
     <Title text="Оформление заказа" className="font-extrabold mb-8 text-[36px]" />
     <FormProvider {...form}>
@@ -62,7 +76,7 @@ export default function CheckoutPage() {
           </div>
           {/* Right side */}
           <div className="w-[450px]">
-            <CheckoutSidebar totalAmount={total} loading={loading || submitting} />
+            <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting} />
           </div>
         </div>
       </form>

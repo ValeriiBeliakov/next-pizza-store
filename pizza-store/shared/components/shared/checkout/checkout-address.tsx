@@ -1,5 +1,5 @@
+'use client';
 import React from 'react';
-import { cn } from '@/shared/lib/utils';
 import { AdressInput } from '../address-input';
 import { FormTextarea } from '../form-components';
 import { WhiteBlock } from '../white-block';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const CheckoutAddress: React.FC<Props> = ({ className }) => {
-    const {control} = useFormContext()
+    const {control} = useFormContext();
     return (
        
             <WhiteBlock title="3. Адрес доставки" className={className}>
