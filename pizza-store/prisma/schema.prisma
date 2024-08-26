@@ -152,13 +152,13 @@ model VerificationCode {
 
 
 
-enum OrderStatus {
+export enum OrderStatus {
     PENDING
     SUCCEEDED
     CANCELLED
 }
 
-enum UserRole {
+export enum UserRole {
     USER
     ADMIN
 }
