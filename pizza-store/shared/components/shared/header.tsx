@@ -7,7 +7,7 @@ import pizza from "../../../app/images/icons/pizza.svg";
 import Link from "next/link";
 import { AuthModal, CartButton, ProfileButton, SearchInput } from "./index";
 import { cn } from "@/shared/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 
@@ -23,16 +23,15 @@ export const Header: React.FC<Props> = ({
   hasSearch = true,
   hasCart = true,
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const [open,setOpen] = useState(false);
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    if(searchParams.has('verify')){
-      router.replace('/')
-      setTimeout(() => toast.success('Почта успешно подтверждена'), 500)
-    }
-    
-  },[])
+  // const searchParams = useSearchParams();
+  // useEffect(() => {
+  //   if(searchParams.has('verified')){
+  //     router.replace('/')
+  //     setTimeout(() => toast.success('Почта успешно подтверждена'), 500)
+  //   }
+  // },[])
 
  
   return (

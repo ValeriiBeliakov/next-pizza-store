@@ -156,20 +156,20 @@ export async function registerUser(body:Prisma.UserCreateInput){
     if(!newUser){
       throw new Error('Не удалось создать пользователя')
     }
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    await prisma.verificationCode.create({
-      data: {
-        code,
-        userId: newUser.id,
-      },
-    });
-    await SendEmail(
-      newUser.email,
-      'Next Pizza / 📝 Подтверждение регистрации',
-      VerificationUserTemplate({
-        code,
-      }),
-    );
+    // const code = Math.floor(100000 + Math.random() * 900000).toString();
+    // await prisma.verificationCode.create({
+    //   data: {
+    //     code,
+    //     userId: newUser.id,
+    //   },
+    // });
+    // await SendEmail(
+    //   newUser.email,
+    //   'Next Pizza / 📝 Подтверждение регистрации',
+    //   VerificationUserTemplate({
+    //     code,
+    //   }),
+    // );
 
   }
   catch (error) {
